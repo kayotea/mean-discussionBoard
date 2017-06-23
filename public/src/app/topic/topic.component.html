@@ -1,0 +1,54 @@
+<p>
+  <a [routerLink]="['/user', topic._user._id]">
+    {{topic._user.username}}
+  </a> 
+  posted a topic:
+  <button (click)="logout()">Logout</button>
+  <button (click)="dashboard()">Dashboard</button>
+</p>
+<h3>{{topic.title}}</h3>
+<p>{{topic.topic_text}}</p>
+<p><b>Post your answer here...</b></p>
+<form (submit)="submitPost(postform)" #postform="ngForm">
+  <textarea name="post"
+    rows="4" 
+    cols="50" 
+    required
+    [(ngModel)]="newpost.text"
+    #post="ngModel"></textarea><br>
+  <!--error message:-->
+  <div *ngIf="post.errors && (postform.submitted || post.touched)" class="error">
+    <p [hidden]="!post.errors.required" class="error">
+      Please type a response
+    </p>
+  </div>
+  <input type="submit" value="Post" [disabled]="!postform.form.valid">
+</form>
+<hr>
+
+<div *ngFor="let answer of topic._answers">
+  <p>
+    <a [routerLink]="['/user', answer._user._id]">
+      {{answer._user.username}}:
+    </a> {{answer.text}}
+    <span class="red">{{answer._votedown.length}}</span>
+    <button (click)="downVote(answer)">v</button>
+    <span class="green">{{answer._voteup.length}}</span>
+    <button (click)="upVote(answer)">^</button>
+  </p>
+
+  <div *ngFor="let comment of answer._comments" class="comment">
+    <p><a [routerLink]="['/user', comment._user._id]">{{comment._user.username}}:</a> {{comment.text}}</p>
+  </div>
+
+  <form (submit)="submitComment(answer, comment.value)" #commentform="ngForm">
+  <textarea name="comment"
+    rows="2" 
+    cols="50" 
+    required
+    #comment
+    ></textarea><br>
+  <input type="submit" value="Comment" [disabled]="!commentform.form.valid">
+  </form>
+  <hr>
+</div>

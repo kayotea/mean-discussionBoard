@@ -1,0 +1,51 @@
+<h3>Add a New Topic:</h3>
+<form (submit)="submitTopic(topicform)" #topicform="ngForm">
+  <label for="title">Topic:</label>
+  <!--topic title-->
+  <input type="text" 
+    name="title"
+    required
+    [(ngModel)]="newtopic.title"
+    #title="ngModel"><br>
+    <!--error message:-->
+    <div *ngIf="title.errors && (topicform.submitted || title.touched)" class="error">
+      <p [hidden]="!title.errors.required" class="error">
+        Topic title is required
+      </p>
+    </div>
+  <!--topic description-->
+  <label for="description">Description:</label><br>
+  <textarea 
+    name="description" 
+    rows="4" cols="50" 
+    required
+    [(ngModel)]="newtopic.topic_text"
+    #description="ngModel"></textarea><br>
+    <!--error message:-->
+    <div *ngIf="description.errors && (topicform.submitted || description.touched)" class="error">
+      <p [hidden]="!description.errors.required" class="error">
+        Description is required
+      </p>
+    </div>
+  <!--topic category-->
+  <label for="category">Category:</label>
+  <select 
+    name="category"
+    required
+    [(ngModel)]="newtopic.category"
+    #category="ngModel">
+    <option value="HTML">HTML</option>
+    <option value="Python">Python</option>
+    <option value="Mongo">Mongo</option>
+    <option value="Angular">Angular</option>
+    <option value="Django">Django</option>
+    <option value="other">Other</option>
+  </select><br>
+  <!--error message:-->
+    <div *ngIf="category.errors && (topicform.submitted || category.touched)" class="error">
+      <p [hidden]="!category.errors.required" class="error">
+        Please choose a category
+      </p>
+    </div>
+  <input type="submit" value="Submit" [disabled]="!topicform.form.valid">
+</form>

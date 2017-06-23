@@ -1,0 +1,16 @@
+<p>Hello!</p>
+<p>Please enter your name to join and share your ideas.</p>
+<form (submit)="submitForm(login)" #login="ngForm">
+  <input type="text" 
+    name="username"
+    required
+    [(ngModel)]="user"
+    #username="ngModel">
+  <!--error message:-->
+  <div *ngIf="username.errors && (login.submitted || username.touched)" class="error">
+    <p [hidden]="!username.errors.required" class="error">
+      Username required.
+    </p>
+  </div>
+  <input type="submit" value="Enter" [disabled]="!login.form.valid">
+</form>

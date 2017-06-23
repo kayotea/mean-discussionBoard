@@ -1,0 +1,19 @@
+table, td, tr, th {
+    margin: 5px;
+    text-align: center;
+    padding: 10px;
+}
+table, td, th, tr {
+    border: 1px dotted black;
+}
+table {
+    border-collapse: collapse;
+}
+button {
+    float: right;
+}
+a {
+    text-decoration: none;
+    color: steelblue;
+    font-weight: bold;
+}

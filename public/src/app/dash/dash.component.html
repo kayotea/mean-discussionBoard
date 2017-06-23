@@ -1,0 +1,27 @@
+<h3>
+  Welcome, {{user}}!
+  <button (click)="logout()">logout</button>
+</h3>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Topic</th> 
+    <th>Username</th>
+    <th>Posts</th>
+  </tr>
+  <tr *ngFor="let topic of topics">
+    <td>{{topic.category}}</td>
+    <td>
+      <a [routerLink]="['/topic', topic._id]">
+        {{topic.title}}
+      </a>
+    </td> 
+    <td>
+      <a [routerLink]="['/user', topic._user._id]">
+      {{topic._user.username}}
+      </a>
+    </td>
+    <td>{{topic._answers.length}}</td>
+  </tr>
+</table>
+<app-topic-form (refreshTopics)="refreshTrigger()"></app-topic-form>

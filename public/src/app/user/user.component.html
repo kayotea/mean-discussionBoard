@@ -1,0 +1,11 @@
+<h3>
+  Username: {{user.username}}
+  <button (click)="logout()">Logout</button>
+  <button (click)="dashboard()">Dashboard</button>
+</h3>
+<p>Posted...</p>
+<ul>
+  <li>{{user._topics.length}} Topic</li>
+  <li>{{user._answers.length}} Posts</li>
+  <li>{{user._comments.length}} Comments</li>
+</ul>
